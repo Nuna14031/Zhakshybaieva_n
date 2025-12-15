@@ -1,5 +1,5 @@
 #include "ball.h"
-#include "assets.h"
+
 #include "level.h"
 #include "paddle.h"
 
@@ -21,7 +21,7 @@ void spawn_ball()
                 goto outer_loop_end;
             }
         }
-    }
+    }                                        
 outer_loop_end:;
 }
 
@@ -57,6 +57,7 @@ void move_ball()
         --current_level_blocks;
     } else if (is_colliding_with_paddle(next_ball_pos, ball_size)) {
         ball_vel.y = -std::abs(ball_vel.y);
+        
     }
 
     ball_pos = next_ball_pos;

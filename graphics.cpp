@@ -36,8 +36,6 @@ Vector2 shift_to_center;
 Vector2 victory_balls_pos[victory_balls_count];
 Vector2 victory_balls_vel[victory_balls_count];
 
-size_t game_frame = 0;
-
 void draw_image(const Texture2D& image, const float x, const float y, const float width, const float height)
 {
     const Rectangle source = { 0.0f, 0.0f, static_cast<float>(image.width), static_cast<float>(image.height) };

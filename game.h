@@ -7,7 +7,6 @@ constexpr char VOID = ' ';
 constexpr char WALL = '#';
 constexpr char BLOCKS = '@';
 constexpr char PADDLE = 'P';
-constexpr char BOUNDARY = '!';
 constexpr char BALL = '*';
 
 struct level {
@@ -57,14 +56,25 @@ inline char level_2_data[] = {
     '#', ' ', ' ', ' ', ' ', 'P', ' ', ' ', ' ', ' ', ' ', ' ', '#',
     '#', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '#'
 };
+
 inline level level_2 = {
     13, 13,
     level_2_data
 };
 
-inline constexpr size_t level_count = 2;
+inline char level_3_data[] = {
+    '#' // ect...
+    
+};
+
+inline level level_3 = {
+  1, 1,
+    level_3_data
+};
+
+inline constexpr size_t level_count = 3;
 inline level levels[level_count] = {
-    level_1, level_2
+    level_1, level_2, level_3
 };
 
 inline game_state game_state = menu_state;
