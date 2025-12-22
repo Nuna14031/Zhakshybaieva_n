@@ -12,7 +12,7 @@ void zero_game_state()
     player_lives = 3;
     current_level_index = 0;
     game_state = in_game_state;
-    load_level(0);
+    load_level(2);
 }
 
 void update()

@@ -268,7 +268,7 @@ void draw_victory_menu()
 {
     animate_victory_menu();
 
-    DrawRectangleV({ 0.0f, 0.0f }, { screen_size.x, screen_size.y }, { 0, 0, 0, 50 });
+    draw_image(victory_background, 0, 0, screen_size.x, screen_size.y);
 
     for (const auto& [x, y] : victory_balls_pos) {
         DrawCircleV({ x, y }, victory_balls_size, WHITE);

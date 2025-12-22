@@ -1,6 +1,6 @@
 # Simple Breakout
 
-![Breakout]( png.)
+![Breakout](data/images/screens/breakout.png)
 
 ## Description
 ---
@@ -11,21 +11,30 @@ A classic arcade Breakout game implemented in C++ using the Raylib library. The 
 ## Features
 
 * **Added 3 more unique levels**  (with increasing complexity)
-![Title Screen](png.)
+
+![Title Screen1](data/images/screens/level_2.png
+
+![Title Screen2](data/images/screens/level_3.png)
+
 
 * **Sound effects on every game state**
 
-![Game Screen, Level 2](png.)
+![sounds_effects.png](data/images/screens/sounds_effects.png)
 
 * **Multiple brick types** (Standard, Double-hit, Bonus)
 
-![Pause Screen](png)
+![block.png](data/images/block.png)
+
+![d_block.png](data/images/d_block.png)
+
+![potion.png](data/images/potion.png)
 
 * **Live sistem** (3 number of lives) 
 
-![Victory Screen](png)
+![player_life.png](data/images/screens/player_life.png)
 
 ## Controls 
+
  - A / LEFT ARROW – Move paddle left
 
  - D / RIGHT ARROW – Move paddle right
@@ -56,20 +65,35 @@ A classic arcade Breakout game implemented in C++ using the Raylib library. The 
 
 **Progressive Difficulty** – Each level introduces new challenges
 
+![level_4.png](data/images/screens/level_4.png)
+
+![level_5.png](data/images/screens/level_5.png)
+
 **Animated Ball** - Multi-frame sprite animation
+![ball0.png](data/images/ball/ball0.png)
 
 ## Level Design
 
 The game includes 5 meticulously designed levels:
  - **Level 1** – Tuto**rial with basic brick layout
 
+![level_1.png](data/images/screens/level_1.png)
+ 
  - **Level 2** – Strategic brick placement
+
+![level_2.png](data/images/screens/level_2.png)
 
  - **Level 3** – Introduction of double bricks
 
+![level_3.png](data/images/screens/level_3.png)
+
  - **Level 4** – Mixed brick types with complex patterns
 
+![level_4.png](data/images/screens/level_4.png)
+
  - **Level 5** – Final challenge with unique symmetrical design 
+
+![level_5.png](data/images/screens/level_5.png)
 
 ## Project Structure
  ```text
