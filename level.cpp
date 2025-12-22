@@ -8,6 +8,7 @@
 #include "raylib.h"
 
 char* current_level_data;
+extern Sound next_level_sound;
 
 void load_level(const int offset)
 {
@@ -40,6 +41,9 @@ void load_level(const int offset)
     spawn_paddle();
 
     derive_graphics_metrics();
+    if (current_level_index > 0) {
+        PlaySound(next_level_sound);
+    }
 }
 
 void unload_level()
@@ -73,7 +77,8 @@ bool is_colliding_with_level_cell(const Vector2 pos, const Vector2 size, const c
             }
 
             if (get_level_cell(row, column) == cell) {
-                if (const Rectangle block_hitbox = { static_cast<float>(column), static_cast<float>(row), 1.0f, 1.0f }; CheckCollisionRecs(hitbox, block_hitbox)) {
+                if (const Rectangle block_hitbox = { static_cast<float>(column), static_cast<float>(row), 1.0f, 1.0f }; CheckCollisionRecs(hitbox, block_hitbox)
+                    ) {
                     return true;
                 }
             }

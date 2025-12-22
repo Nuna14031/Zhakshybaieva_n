@@ -8,6 +8,11 @@
 #include <cmath>
 #include <numbers>
 
+extern Sound d_block_break_sound;
+extern Sound block_break_sound;
+extern Sound bonus_sound;
+
+
 void spawn_ball()
 {
     for (int column = 0; column < current_level.columns; column++) {
@@ -17,7 +22,7 @@ void spawn_ball()
                 ball_pos = { static_cast<float>(column), static_cast<float>(row) };
                 constexpr float ball_launch_angle_radians = ball_launch_angle_degrees * (std::numbers::pi_v<float> / 180.0f);
                 ball_vel.y = -ball_launch_vel_mag * std::sin(ball_launch_angle_radians);
-                ball_vel.x = (rand() % 2 == 0) ? ball_launch_vel_mag * std::cos(ball_launch_angle_radians) : -ball_launch_vel_mag * std::cos(ball_launch_angle_radians);
+                ball_vel.x = rand() % 2 == 0 ? ball_launch_vel_mag * std::cos(ball_launch_angle_radians) : -ball_launch_vel_mag * std::cos(ball_launch_angle_radians);
                 goto outer_loop_end;
             }
         }
@@ -41,7 +46,21 @@ void move_ball()
             ball_vel.y = -ball_vel.y;
             next_ball_pos.y = std::round(next_ball_pos.y);
         }
-    } else if (is_colliding_with_level_cell(next_ball_pos, ball_size, BLOCKS)) {
+    }
+    else if (is_colliding_with_level_cell(next_ball_pos, ball_size, DOUBLE_BLOCKS)) {
+        char& temp = get_colliding_level_cell(next_ball_pos, ball_size, DOUBLE_BLOCKS);
+        if (is_colliding_with_level_cell({ next_ball_pos.x, ball_pos.y }, ball_size, DOUBLE_BLOCKS)) {
+            ball_vel.x = -ball_vel.x;
+            next_ball_pos.x = std::round(next_ball_pos.x);
+        }
+        if (is_colliding_with_level_cell({ ball_pos.x, next_ball_pos.y }, ball_size, DOUBLE_BLOCKS)) {
+            ball_vel.y = -ball_vel.y;
+            next_ball_pos.y = std::round(next_ball_pos.y);
+        }
+        temp = BLOCKS;
+        PlaySound(d_block_break_sound);
+    }
+    else if (is_colliding_with_level_cell(next_ball_pos, ball_size, BLOCKS)) {
         char& temp = get_colliding_level_cell(next_ball_pos, ball_size, BLOCKS);
 
         if (is_colliding_with_level_cell({ next_ball_pos.x, ball_pos.y }, ball_size, BLOCKS)) {
@@ -55,9 +74,27 @@ void move_ball()
 
         temp = VOID;
         --current_level_blocks;
-    } else if (is_colliding_with_paddle(next_ball_pos, ball_size)) {
+        PlaySound(block_break_sound);
+    }
+    else if (is_colliding_with_level_cell(next_ball_pos, ball_size, BONUS)) {
+        char& temp = get_colliding_level_cell(next_ball_pos, ball_size, BONUS);
+        if (is_colliding_with_level_cell({ next_ball_pos.x, ball_pos.y }, ball_size, BONUS)) {
+            ball_vel.x = -ball_vel.x;
+            next_ball_pos.x = std::round(next_ball_pos.x);
+        }
+        if (is_colliding_with_level_cell({ ball_pos.x, next_ball_pos.y }, ball_size, BONUS)) {
+            ball_vel.y = -ball_vel.y;
+            next_ball_pos.y = std::round(next_ball_pos.y);
+        }
+        temp = VOID;
+        --current_level_blocks;
+        if (player_lives < 3) {
+            player_lives++;
+        }
+        PlaySound(bonus_sound);
+    }
+    else if (is_colliding_with_paddle(next_ball_pos, ball_size)) {
         ball_vel.y = -std::abs(ball_vel.y);
-        
     }
 
     ball_pos = next_ball_pos;

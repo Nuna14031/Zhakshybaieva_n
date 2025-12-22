@@ -100,14 +100,18 @@ void derive_graphics_metrics()
 }
 
 void draw_menu()
-{
+{                                       
     ClearBackground(BLACK);
+
+    draw_level();
+
+    DrawRectangle(0, 0, static_cast<int>(screen_size.x), static_cast<int>(screen_size.y), Color{0, 0, 0, 5});
 
     const Text game_title = {
         "Breakout",
         { 0.50f, 0.50f },
         200.0f,
-        RED,
+        Color{53, 52, 47, 255},
         4.0f,
         &menu_font
     };
@@ -117,11 +121,12 @@ void draw_menu()
         "Press Enter to Start",
         { 0.50f, 0.65f },
         32.0f,
-        WHITE,
+        Color{53, 52, 47, 255},
         4.0f,
         &menu_font
     };
     draw_text(game_subtitle);
+
 }
 
 void draw_ui()
@@ -130,7 +135,7 @@ void draw_ui()
         "LEVEL " + std::to_string(current_level_index + 1) + " OUT OF " + std::to_string(level_count),
         { 0.5f, 0.0375f },
         48.0f,
-        WHITE,
+        Color{53, 52, 47, 255},
         4.0f,
         &menu_font
     };
@@ -140,7 +145,7 @@ void draw_ui()
         "BLOCKS " + std::to_string(current_level_blocks),
         { 0.5f, 0.9625f },
         48.0f,
-        WHITE,
+        Color{53, 52, 47, 255},
         4.0f,
         &menu_font
     };
@@ -149,7 +154,8 @@ void draw_ui()
 
 void draw_level()
 {
-    ClearBackground(BLACK);
+    ClearBackground(WHITE);
+    draw_image(level_background, 0, 0, screen_size.x, screen_size.y);
 
     for (size_t row = 0; row < current_level.rows; ++row) {
         for (size_t column = 0; column < current_level.columns; ++column) {
@@ -164,9 +170,30 @@ void draw_level()
             case BLOCKS:
                 draw_image(block_texture, texture_x_pos, texture_y_pos, cell_size);
                 break;
+            case DOUBLE_BLOCKS:
+                draw_image(d_block_texture, texture_x_pos, texture_y_pos, cell_size);
+                break;
+            case BONUS:
+                draw_image(bonus_texture, texture_x_pos, texture_y_pos, cell_size);
+                break;
             default:;
             }
         }
+    }
+}
+
+void draw_lives()
+{
+    const float life_icon_size = cell_size * 0.8f;
+    const float spacing = cell_size * 0.3f;
+
+    for (int i = 0; i < 3; ++i) {
+        const float y_pos = 20.0f;
+        const float start_x = 20.0f;
+        const float x_pos = start_x + static_cast<float>(i) * (life_icon_size + spacing);
+
+        if (i < player_lives)
+            draw_image(lives_full_texture, x_pos, y_pos, life_icon_size);
     }
 }
 
@@ -186,17 +213,28 @@ void draw_ball()
 
 void draw_pause_menu()
 {
-    ClearBackground(BLACK);
+    DrawRectangle(0, 0, static_cast<int>(screen_size.x), static_cast<int>(screen_size.y), Color{255, 218, 185, 180}); // LightPink с прозрачностью
 
     const Text paused_title = {
-        "Press Escape to Resume",
-        { 0.50f, 0.50f },
-        32.0f,
-        WHITE,
+        "PAUSED",
+        { 0.50f, 0.45f },
+        120.0f,
+        Color{255, 20, 147, 255},
         4.0f,
         &menu_font
     };
     draw_text(paused_title);
+
+    // Подзаголовок
+    const Text paused_subtitle = {
+        "Press Escape to Resume",
+        { 0.50f, 0.55f },
+        40.0f,
+        WHITE,
+        2.0f,
+        &menu_font
+    };
+    draw_text(paused_subtitle);
 }
 
 void init_victory_menu()
@@ -240,7 +278,7 @@ void draw_victory_menu()
         "Victory!",
         { 0.50f, 0.50f },
         100.0f,
-        RED,
+        Color{53, 52, 47, 255},
         4.0f,
         &menu_font
     };
@@ -250,9 +288,54 @@ void draw_victory_menu()
         "Press Enter to Restart",
         { 0.50f, 0.65f },
         32.0f,
-        WHITE,
+        Color{53, 52, 47, 255},
         4.0f,
         &menu_font
     };
     draw_text(victory_subtitle);
+}
+
+void draw_game_over_menu()
+{
+    draw_image(victory_background, 0, 0, screen_size.x, screen_size.y);
+
+    const Text game_over_title = {
+        "GAME OVER",
+        { 0.50f, 0.40f },
+        100.0f,
+        Color{53, 52, 47, 255},
+        4.0f,
+        &menu_font
+    };
+    draw_text(game_over_title);
+
+    const Text game_over_score = {
+        "Reached Level: " + std::to_string(current_level_index + 1),
+        { 0.50f, 0.50f },
+        40.0f,
+        Color{53, 52, 47, 255},
+        1.5f,
+        &menu_font
+    };
+    draw_text(game_over_score);
+
+    const Text game_over_option1 = {
+        "ENTER - Return to Menu",
+        {0.50f, 0.55f},
+        30.0f,
+        Color{53, 52, 47, 255},
+        1.0f,
+        &menu_font
+    };
+    draw_text(game_over_option1);
+
+    const Text game_over_option2 = {
+        "R - Restart Game",
+        {0.50f, 0.60f},
+        30.0f,
+        Color{53, 52, 47, 255},
+        1.0f,
+        &menu_font
+    };
+    draw_text(game_over_option2);
 }

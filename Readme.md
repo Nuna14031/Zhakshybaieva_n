@@ -1,136 +1,110 @@
 # Simple Breakout
 
-![Breakout](https://i.postimg.cc/FzBNx6FK/Screenshot-20251103-175907.png)
+![Breakout]( png.)
+
+## Description
+---
+A classic arcade Breakout game implemented in C++ using the Raylib library. The player controls a paddle to bounce a ball and destroy bricks across progressively challenging levels.
 
 ---
 
-The primary goal of this project is to build a simple [Breakout](https://en.wikipedia.org/wiki/Breakout_(video_game)) game written in C++ using the [raylib](https://www.raylib.com) graphics library. In this game, the player controls a paddle that keeps the ball within the level, which destroys blocks upon contact. The objective of the game is to navigate through a series of levels, cleaning all levels of blocks.
+## Features
 
-The game should adhere to the best structured and procedural programming principles. You should strive to effectively utilize structured programming constructs such as selection constructs and loops. Additionally, endeavor to achieve procedural decomposition of your code into functions. Ensure consistent formatting in your code, adhering to coding style best practices, including proper naming, indentation, use of white spaces, blank lines, and comments.
+* **Added 3 more unique levels**  (with increasing complexity)
+![Title Screen](png.)
 
-Be creative, and ensure to implement all the requirements outlined below in your project.
+* **Sound effects on every game state**
 
----
+![Game Screen, Level 2](png.)
 
-## Core Requirements
+* **Multiple brick types** (Standard, Double-hit, Bonus)
 
-* **Title or Menu Screen**: The game should start with a title screen featuring a game logo and a message to start the game. Alternatively, it could be a menu screen with options to start the game, view the instructions, or quit the game.
+![Pause Screen](png)
 
-![Title Screen](https://i.postimg.cc/ZRXBRS8N/Screenshot-20251029-161437.png)
+* **Live sistem** (3 number of lives) 
 
-* **Game Screen**: From the title or menu screen, the player should be able to start the game. The game screen displays the paddle, the ball, and the level. The player moves the paddle using the keyboard. The goal is to move from one level to the next by destroying all the blocks in every level. In our game, the objective of the player is to reach the end by passing through all the levels.
+![Victory Screen](png)
 
-![Game Screen, Level 2](https://i.postimg.cc/FzBNx6FK/Screenshot-20251103-175907.png)
+## Controls 
+ - A / LEFT ARROW – Move paddle left
 
-* **Pause Screen**: The player should be able to pause the game by pressing the Escape key. A 'Pause' screen appears with an option to resume the game. Pressing the Escape key resumes the game.
+ - D / RIGHT ARROW – Move paddle right
 
-![Pause Screen](https://i.postimg.cc/Gt5djf3h/Screenshot-20251103-175849.png)
+ - ENTER – Start game / Confirm selection
 
-* **Victory Screen**: Upon passing through all the levels, a victory screen displays a congratulatory message, allowing the player to return to the title screen. Some animation, possibly from lab class exercises, should play in the background to indicate the game's completion. You are at liberty to come up with the animation.
+ - ESC – Pause / Resume game
 
-![Victory Screen](https://i.postimg.cc/CL5KfGhW/Screenshot-20251103-175933.png)
+ - M – Return to main menu (from pause)
 
-## Additional Requirements
+ - R – Restart game (from game over screen)
 
-* **Additional Levels**: Add at least *three extra levels* to the game. These levels should be more challenging than the ones given. You may add more levels if you want.
 
-* **Additional Game Elements**: Introduce at least *three new elements* to the game. These could include collectibles, moving obstacles, additional balls, turning the game 3-D, special time events, portals, more advanced bounce-off physics, improved collision detecion, or other modifications to the gameplay. Let your creativity guide you.
+## Game Mechanics
 
-* **Game Over Screen**: Implement *a 'Game Over' screen* that displays a message when the player loses the game, such as when the player runs out of lives or the ball leaves the level. This screen should allow the player to return to the title screen or try again.
+### Brick Types
 
-* **Additional Sounds**: Add at least *three new sounds* to the game. These sounds could accompany actions like bouncing off obstacles, picking up collectibles, or exiting the final level.
+**Standard Brick (@) – Breaks in one hit** 
 
-* **Background Music**: Incorporate at least *one music track* into the game. This track should play on at least one of the screens. Ensure the track is royalty-free or that you have usage rights. Store the music files in the `data/music/` directory and keep them reasonably sized.
+**Double Brick (D) – Requires two hits to break**
 
-## Practical Requirements
+**Bonus Brick (B) – Grants extra life when broken**
 
-* Develop the code **independently of your peers** and maintain a **detailed project commit history**. Be aware that points will be withheld for any suspicion of code plagiarism, even if it's unfounded. Additionally, consistent progress must be evident in your project commit history to receive any points at all.
 
-* Rewrite the `Readme.md` file with a description of your game and a list of the features that you have implemented. **Note that partially implementing some features is preferable to not implementing any.**
+## Power-ups & Special Features
 
-* Ensure that the game is playable and contains all necessary files. **It should be straightforward for the instructor to set up and start the game with minimal effort.**
+**Extra Life** - Collect bonus bricks to gain additional lives
 
-## Deliverables
+**Progressive Difficulty** – Each level introduces new challenges
 
-* Develop the game within the `<repository>` directory. This directory should include a `data/` subdirectory containing all game assets (images, sprites, fonts, sounds, etc.).
+**Animated Ball** - Multi-frame sprite animation
 
-* Organize your code into `.h` and `.cpp` files. Each file should contain related constants, variables, and functions.
+## Level Design
 
-* Place your main game loop into the `breakout.cpp` file.
+The game includes 5 meticulously designed levels:
+ - **Level 1** – Tuto**rial with basic brick layout
 
-Upon completion, your Project directory should have an organized structure similar to the following example:
+ - **Level 2** – Strategic brick placement
 
+ - **Level 3** – Introduction of double bricks
+
+ - **Level 4** – Mixed brick types with complex patterns
+
+ - **Level 5** – Final challenge with unique symmetrical design 
+
+## Project Structure
+ ```text
+breakout/
+├── CMakeLists.txt          # Build configuration
+├── breakout.cpp           # Main game loop
+├── game.h                # Game constants and structures
+├── sprite.[h/cpp]        # Sprite animation system
+├── assets.[h/cpp]        # Resource management
+├── graphics.[h/cpp]      # Rendering system
+├── level.[h/cpp]         # Level management
+├── ball.[h/cpp]          # Ball physics and behavior
+├── paddle.[h/cpp]        # Paddle controls
+└── data/                # Game assets
+├── images/          # Textures and sprites
+│   ├── backgrounds/ # Level backgrounds
+│   ├── ball/        # Animated ball frames
+│   └── *.png        # Various game textures
+├── sounds/          # Audio effects
+│   └── *.wav        # Sound files
+└── fonts/           # Font resources
 ```
-.
-└── <repository>
-    ├── data
-    │   ├── fonts
-    │   │   └── ...
-    │   ├── images
-    │   │   └── ...
-    │   ├── music
-    │   │   └── ...
-    │   └── sounds
-    │       └── ...
-    ├── breakout.cpp
-    ├── game.h
-    ├── <various header and C++ files>.h/cpp
-    ├── ... (.idea, .gitignore, .clang-format, CMakeLists.txt, other files)
-    └── Readme.md
-```
+## Game States
 
-[Fork](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/working-with-forks/fork-a-repo) our repository first, then clone it. If you skip this step, you will not be able to push your changes. Commit regularly, such as after implementing a feature (ensure the program is in a compilable state).
+ - **Main Menu** 
+ - **In-Game**  
+ - **Paused** 
+ - **Game Over** 
+ - **Victory** 
 
----
+## Audio System
 
-## Project Setup Notes
+The game features a comprehensive audio system with:
 
-Set up the raylib project as you have done in previous labs for graphical assignments.
+- Collision sound effects for different brick types
+- Life loss notification sound
+- Level completion fanfare
 
-Before attempting to run the code for the `breakout` target, please ensure that you set the `Working directory` correctly in your CLion IDE.
-
-The current working directory must point to the directory containing the necessary resource files (e.g., `data/images/`, `data/fonts/`, and `data/sound|music/`). Failure to do so will result in these resources not being loaded properly, and you will not see or hear the intended visuals or sounds in the game.
-
-To set the working directory:
-
-1. Open the `Run` menu and find the `Edit configurations` button there in CLion.
-2. Select the `breakout` target.
-3. Locate the `Working directory` field.
-4. Set it to the `$ProjectFileDir$` value (this ensures it points to the root project directory with the `data` folder).
-5. Save your configuration and run the target again.
-
-If you encounter any issues, double-check that the paths to the resource files are correct relative to the working directory.
-
-## Implementation Tips
-
-- Read the raylib [cheatsheet](https://www.raylib.com/cheatsheet/cheatsheet.html) to discover what is possible.
-- Explore the raylib [examples](https://www.raylib.com/examples.html) for inspiration.
-- Spend time searching for ways to break your program: that will help you eliminate edge cases and bugs.
-- Log values and verify their correctness if stumbling across a bug.
-- Use compilation and linking errors to your advantage: _read_ them.
-- Use the debug tool to resolve crashes.
-
-## Deadline
-
-Refer to the specific course or assignment page on Moodle for detailed information about deadlines and the grading rubric.
-
-## Links
-
-### raylib
-
-* [Wiki](https://github.com/raysan5/raylib/wiki)
-* [Cheatsheet](https://www.raylib.com/cheatsheet/cheatsheet.html)
-* [Examples](https://www.raylib.com/examples.html)
-
-### Tools
-
-* [libresprite](https://libresprite.github.io/#!/)
-* [jsfxr](https://sfxr.me/)
-
-## Books
-
-* Introduction to Programming with C++, 3rd Edition by Daniel Liang
-
-## Credits
-
-* [Luna Maltseva](https://github.com/lunamaltseva)
